@@ -1,4 +1,5 @@
 import './App.css'
+import Banner from './components/Banner/Banner'
 import Row from './components/Row/Row'
 import requests from './request'
 
@@ -6,6 +7,7 @@ function App() {
 
   return (
     <>
+    <Banner/>
       <Row title="NETFLIX ORIGINALS" isLargeRow fetchUrl={requests.fetchNetflixOriginals} />
 			<Row title="Trending" fetchUrl={requests.fetchTrending} />
 			<Row title="Top Rated" fetchUrl={requests.fetchTopRated} />
