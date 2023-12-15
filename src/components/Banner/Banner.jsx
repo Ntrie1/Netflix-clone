@@ -2,6 +2,8 @@ import axios from "../../axios";
 import { useEffect, useState } from "react";
 import requests from "../../request";
 
+import './Banner.css'
+
 const Banner = () => {
 
     const [movie, setMovie] = useState([]);
@@ -20,6 +22,10 @@ const Banner = () => {
 
     console.log(movie);
 
+    function truncate(str, n){
+        return str?.length > n ? str.substr(0, n - 1) + '...' : str;
+    }
+
     return (
         <header className="banner"
         style={{
@@ -31,7 +37,7 @@ const Banner = () => {
         }}>
             
             <div className="banner_contents">
-                <h1>
+                <h1 className="banner_title">
                     {movie?.title || movie?.name || movie?.original_name}
                 </h1>
 
@@ -41,7 +47,7 @@ const Banner = () => {
                 </div>
 
                 <h1 className="banner_description">
-                    {movie?.overview}
+                    {truncate(movie?.overview, 150)}
                 </h1>
 
             </div>
