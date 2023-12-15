@@ -6,7 +6,7 @@ import requests from './request'
 function App() {
 
   return (
-    <>
+    <div className='app'>
     <Banner/>
       <Row title="NETFLIX ORIGINALS" isLargeRow fetchUrl={requests.fetchNetflixOriginals} />
 			<Row title="Trending" fetchUrl={requests.fetchTrending} />
@@ -16,7 +16,7 @@ function App() {
 			<Row title="Horror Movies" fetchUrl={requests.fetchHorrorMovies} />
 			<Row title="Romance Movies" fetchUrl={requests.fetchRomanceMovies} />
 			<Row title="Documentaries" fetchUrl={requests.fetchDocumentaries} />
-    </>
+    </div>
   )
 }
 
