@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import './Row.css';
 import YouTube from "react-youtube";
+import movieTrailer from "movie-trailer";
 
 const base_url = "https://image.tmdb.org/t/p/original"
 
@@ -22,7 +23,9 @@ const Row = ({
 
         const fetchData = async () => {
             const reqest = await axios.get(fetchUrl);
-            setMovies(reqest.data.results)
+            setMovies(reqest.data.results);
+            return reqest;
+            
         }
 
         fetchData();
@@ -39,7 +42,13 @@ const Row = ({
 
       const handleClick = (movie) => {
         if (trailerUrl) {
-            
+            setTrailerUrl('');
+        } else {
+            movieTrailer(movie?.name || '')
+            .then(url => {
+                const urlParams = new URLSearchParams(new URL(url).search);
+                setTrailerUrl(urlParams.get('v'));
+            }).catch(error => console.log(error))
         }
       }
 
@@ -61,7 +70,7 @@ const Row = ({
 
 
             </div>
-                <YouTube videoId='-XPXGkd4X5s' opts={opts} />
+                {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
         </div>
     )
 }
