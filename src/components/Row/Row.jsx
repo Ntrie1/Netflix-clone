@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 import './Row.css';
+import YouTube from "react-youtube";
 
 const base_url = "https://image.tmdb.org/t/p/original"
 
@@ -15,6 +16,7 @@ const Row = ({
 }) => {
 
     const [movies, setMovies] = useState([]);
+    const [trailerUrl, setTrailerUrl] = useState('');
 
     useEffect(() => {
 
@@ -27,6 +29,20 @@ const Row = ({
 
     }, [fetchUrl]);
 
+    const opts = {
+        height: "390",
+        width: "99%",
+        playerVars: {
+          autoplay: 1,
+        }
+      }
+
+      const handleClick = (movie) => {
+        if (trailerUrl) {
+            
+        }
+      }
+
     return (
         <div className="row">
             <h2>{title}</h2>
@@ -36,13 +52,16 @@ const Row = ({
                 {movies.map((movie) => (
                     <img 
                     key={movie.id} 
+                    onClick={() => handleClick(movie)}
                     src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`} 
                     alt={movie.name}
                     className={`row_poster ${isLargeRow && "row_posterLarge"}`}
                     />
                 ))}
 
+
             </div>
+                <YouTube videoId='-XPXGkd4X5s' opts={opts} />
         </div>
     )
 }
